@@ -1,0 +1,26 @@
+.RequestsTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: center;
+    border: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.newRequest {
+    flex-grow: 0;
+    width: 200px;
+    margin: 10px 10px 10px 0;
+}
+
+.RequestsAll {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+}
