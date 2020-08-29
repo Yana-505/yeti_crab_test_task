@@ -1,14 +1,15 @@
 import React, {Component} from "react";
 import './RequestTable.css'
+import {NewRequest} from "../NewRequest/NewRequest";
 
 export class RequestsTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            isFetching: true,
             error: null
         }
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     componentDidMount() {
@@ -21,11 +22,17 @@ export class RequestsTable extends Component {
             })
             .then(result => {
                 // debugger;
-                this.setState({data: result, isFetching: false});
+                this.setState({data: result});
             })
             .catch(e => {
                 console.error(e);
             });
+    }
+
+    handleAdd(newRequest){
+        this.setState({
+            data: [...this.state.data, newRequest]
+        });
     }
 
     render() {
@@ -44,7 +51,7 @@ export class RequestsTable extends Component {
                     </tr>
                     {
                         this.state.data.map(e =>
-                            <tr>
+                            <tr key={e._id}>
                                 <td>{e.number}</td>
                                 <td>{e.CompanyName}</td>
                                 <td>{e.FIOCarrier}</td>
@@ -55,6 +62,7 @@ export class RequestsTable extends Component {
                         )
                     }
                 </table>
+                <NewRequest onAdd={this.handleAdd}/>
             </div>
         );
     }
