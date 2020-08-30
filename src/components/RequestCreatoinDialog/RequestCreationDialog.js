@@ -1,11 +1,15 @@
 import React, {Component} from "react";
+import {Dialog} from "../Dialog/Dialog";
 
 /**
  * Форма для создания заявок
  */
-export class NewRequest extends Component {
+export class RequestCreationDialog extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        }
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -28,10 +32,9 @@ export class NewRequest extends Component {
         form.reset();
     }
 
-
     render() {
         return (
-            <div>
+            <Dialog>
                 <h1>Создание завки</h1>
                 <form className="NewRequest" onSubmit={this.handleClick}>
                     <p>Номер заявки <input name="number" type="text" placeholder="Введите номер заявки"/></p>
@@ -44,7 +47,7 @@ export class NewRequest extends Component {
                     <p>ATI код <input name="ATICode" type="text" placeholder="Введите ATI код"/></p>
                     <input type="submit" value="Создать заявку"/>
                 </form>
-            </div>
+            </Dialog>
         )
     }
 }

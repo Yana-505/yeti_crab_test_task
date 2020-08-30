@@ -1,15 +1,17 @@
 import React, {Component} from "react";
 import './RequestTable.css'
-import {NewRequest} from "../NewRequest/NewRequest";
+import {RequestCreationDialog} from "../RequestCreatoinDialog/RequestCreationDialog";
 
 export class RequestsTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            error: null
+            error: null,
+            newRequest: false
         }
         this.handleAdd = this.handleAdd.bind(this);
+        this.newRequestClick = this.newRequestClick.bind(this)
     }
 
     componentDidMount() {
@@ -31,7 +33,14 @@ export class RequestsTable extends Component {
 
     handleAdd(newRequest){
         this.setState({
-            data: [...this.state.data, newRequest]
+            data: [...this.state.data, newRequest],
+            newRequest: false
+        });
+    }
+
+    newRequestClick(){
+        this.setState({
+            newRequest: true
         });
     }
 
@@ -39,7 +48,7 @@ export class RequestsTable extends Component {
         return (
             <div className="RequestsAll">
                 <h1>Таблица заявок</h1>
-                <button className="newRequest">Создать заявку</button>
+                <button className="newRequest" onClick={this.newRequestClick}>Создать заявку</button>
                 <table className="RequestsTable">
                     <tr>
                         <th>Номер заявки</th>
@@ -57,12 +66,14 @@ export class RequestsTable extends Component {
                                 <td>{e.FIOCarrier}</td>
                                 <td>{e.TelephoneCarrier}</td>
                                 <td>{e.comment}</td>
-                                <td><a href=''>https://ati.su/firms/{e.ATICode}/info</a></td>
+                                <td><a href={`https://ati.su/firms/${e.ATICode}/info`}>https://ati.su/firms/{e.ATICode}/info</a></td>
                             </tr>
                         )
                     }
                 </table>
-                <NewRequest onAdd={this.handleAdd}/>
+                <div className={`creature-request ${this.state.newRequest ? 'creature-request-choice' : ''}`}>
+                    <RequestCreationDialog onAdd={this.handleAdd}/>
+                </div>
             </div>
         );
     }

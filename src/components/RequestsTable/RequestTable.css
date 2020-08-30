@@ -24,3 +24,11 @@ td {
     width: 80%;
     margin: 0 auto;
 }
+
+.creature-request{
+    display: none;
+}
+
+.creature-request-choice{
+    display: block;
+}
