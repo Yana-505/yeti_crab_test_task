@@ -1,0 +1,10 @@
+.form-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-label input {
+    margin-left: 20px;
+    min-width: 230px;
+}

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import './RequestTable.css'
-import {RequestCreationDialog} from "../RequestCreatoinDialog/RequestCreationDialog";
+import {RequestCreationDialog} from "../RequestCreatoinDialog/RequestCreationDialog.js";
 
 export class RequestsTable extends Component {
     constructor(props) {
@@ -8,47 +8,46 @@ export class RequestsTable extends Component {
         this.state = {
             data: [],
             error: null,
-            newRequest: false
+            creationDialogVisible: false
         }
-        this.handleAdd = this.handleAdd.bind(this);
-        this.newRequestClick = this.newRequestClick.bind(this)
+        this.handleAddNewRequest = this.handleAddNewRequest.bind(this);
+        this.handleCreationDialogOpen = this.handleCreationDialogOpen.bind(this)
+        this.handleCreationDialogClose = this.handleCreationDialogClose.bind(this);
     }
 
     componentDidMount() {
         fetch("http://localhost:3010/requests", {
             method: "GET"
         })
-            .then(response => {
-                // debugger;
-                return response.json();
-            })
-            .then(result => {
-                // debugger;
-                this.setState({data: result});
-            })
-            .catch(e => {
-                console.error(e);
-            });
+            .then(response => response.json())
+            .then(result => this.setState({data: result}))
+            .catch(e => console.error(e));
     }
 
-    handleAdd(newRequest){
+    handleCreationDialogClose(){
+        this.setState({
+            creationDialogVisible: false
+        })
+    };
+
+    handleAddNewRequest(newRequest){
         this.setState({
             data: [...this.state.data, newRequest],
-            newRequest: false
+            creationDialogVisible: false
         });
-    }
+    };
 
-    newRequestClick(){
+    handleCreationDialogOpen(){
         this.setState({
-            newRequest: true
+            creationDialogVisible: true
         });
-    }
+    };
 
     render() {
         return (
             <div className="RequestsAll">
                 <h1>Таблица заявок</h1>
-                <button className="newRequest" onClick={this.newRequestClick}>Создать заявку</button>
+                <button className="newRequest" onClick={this.handleCreationDialogOpen}>Создать заявку</button>
                 <table className="RequestsTable">
                     <tr>
                         <th>Номер заявки</th>
@@ -60,7 +59,7 @@ export class RequestsTable extends Component {
                     </tr>
                     {
                         this.state.data.map(e =>
-                            <tr key={e._id}>
+                            <tr key={e._id} onClick={this.viewingRequest}>
                                 <td>{e.number}</td>
                                 <td>{e.CompanyName}</td>
                                 <td>{e.FIOCarrier}</td>
@@ -71,9 +70,7 @@ export class RequestsTable extends Component {
                         )
                     }
                 </table>
-                <div className={`creature-request ${this.state.newRequest ? 'creature-request-choice' : ''}`}>
-                    <RequestCreationDialog onAdd={this.handleAdd}/>
-                </div>
+                <RequestCreationDialog onAdd={this.handleAddNewRequest} visible={this.state.creationDialogVisible} onClose={this.handleCreationDialogClose} />
             </div>
         );
     }
