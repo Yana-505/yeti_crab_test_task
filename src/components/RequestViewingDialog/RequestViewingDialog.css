@@ -1,0 +1,11 @@
+.data-prop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.data-prop .data-field {
+    margin-left: 20px;
+    min-width: 230px;
+    text-align: right;
+}
