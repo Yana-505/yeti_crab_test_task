@@ -18,6 +18,7 @@ export class RequestsTable extends Component {
         this.handleViewDialogOpen = this.handleViewDialogOpen.bind(this);
         this.handleViewDialogClose = this.handleViewDialogClose.bind(this);
         this.handleDeleteRequest = this.handleDeleteRequest.bind(this);
+        this.handleEditRequest = this.handleEditRequest.bind(this);
     }
 
     componentDidMount() {
@@ -29,32 +30,44 @@ export class RequestsTable extends Component {
             .catch(e => console.error(e));
     }
 
-    handleAddNewRequest(newRequest){
+    handleAddNewRequest(newRequest) {
         this.setState({
             data: [...this.state.data, newRequest],
             creationDialogVisible: false
         });
     };
 
-    handleCreationDialogOpen(){
+    handleEditRequest(editRequest) {
+        this.setState({
+            data: this.state.data.map(request => {
+                if (request._id === editRequest._id) {
+                    return editRequest;
+                } else {
+                    return request;
+                }
+            })
+        });
+    }
+
+    handleCreationDialogOpen() {
         this.setState({
             creationDialogVisible: true
         });
     };
 
-    handleCreationDialogClose(){
+    handleCreationDialogClose() {
         this.setState({
             creationDialogVisible: false
         })
     };
 
-    handleViewDialogOpen(event){
+    handleViewDialogOpen(event) {
         const id = event.currentTarget.dataset.id;
         this.setState({
             viewDialogVisible: true
         })
 
-        fetch(`http://localhost:3010/requests/${id}`,{
+        fetch(`http://localhost:3010/requests/${id}`, {
             method: "GET"
         })
             .then(response => response.json())
@@ -62,13 +75,13 @@ export class RequestsTable extends Component {
             .catch(e => console.error(e));
     }
 
-    handleViewDialogClose(){
+    handleViewDialogClose() {
         this.setState({
             viewDialogVisible: false
         })
     }
 
-    handleDeleteRequest(id){
+    handleDeleteRequest(id) {
         this.setState({
             viewDialogVisible: false,
             data: this.state.data.filter(request => request._id !== id)
@@ -97,13 +110,18 @@ export class RequestsTable extends Component {
                                 <td>{e.FIOCarrier}</td>
                                 <td>{e.TelephoneCarrier}</td>
                                 <td>{e.comment}</td>
-                                <td><a href={`https://ati.su/firms/${e.ATICode}/info`}>https://ati.su/firms/{e.ATICode}/info</a></td>
+                                <td><a
+                                    href={`https://ati.su/firms/${e.ATICode}/info`}>https://ati.su/firms/{e.ATICode}/info</a>
+                                </td>
                             </tr>
                         )
                     }
                 </table>
-                <RequestCreationDialog onAdd={this.handleAddNewRequest} visible={this.state.creationDialogVisible} onClose={this.handleCreationDialogClose} />
-                <RequestViewingDialog onDelete = {this.handleDeleteRequest} request={this.state.selectedRequest} visible={this.state.viewDialogVisible} onClose={this.handleViewDialogClose} />
+                <RequestCreationDialog onAdd={this.handleAddNewRequest} visible={this.state.creationDialogVisible}
+                                       onClose={this.handleCreationDialogClose}/>
+                <RequestViewingDialog onEdit={this.handleEditRequest} onDelete={this.handleDeleteRequest}
+                                      request={this.state.selectedRequest} visible={this.state.viewDialogVisible}
+                                      onClose={this.handleViewDialogClose}/>
             </div>
         );
     }

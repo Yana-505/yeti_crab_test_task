@@ -9,3 +9,7 @@
     min-width: 230px;
     text-align: right;
 }
+
+.view-request.hide {
+    display: none;
+}
