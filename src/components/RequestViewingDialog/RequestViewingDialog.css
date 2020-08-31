@@ -6,10 +6,48 @@
 
 .data-prop .data-field {
     margin-left: 20px;
-    min-width: 230px;
     text-align: right;
 }
 
 .view-request.hide {
     display: none;
+}
+
+.form-label textarea {
+    min-width: 230px;
+    max-width: 230px;
+    min-height: 30px;
+}
+
+.submit-create {
+    border-radius: 10px;
+    background: #8bc34a;
+    border: 2px solid #55994f;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.button-edit {
+    border-radius: 10px;
+    background: #61dafb;
+    border: 2px solid #3fb8d9;
+    margin-left: 20px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.button-delete {
+    border-radius: 10px;
+    background: #e89594;
+    border: 2px solid #e24c4b;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.submit-save-edit {
+    border-radius: 10px;
+    background: #8bc34a;
+    border: 2px solid #55994f;
+    padding: 5px 10px;
+    font-size: 15px;
 }

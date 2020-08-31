@@ -94,8 +94,8 @@ export class RequestViewingDialog extends Component {
                         <div className="data-prop">Коментарий: <span className="data-field">{this.props.request.comment}</span></div>
                         <div className="data-prop">ATI код: <span className="data-field">{this.props.request.ATICode}</span></div>
                     </div>
-                    <button onClick={this.handleClickDelete}>Удалить заявку</button>
-                    <button onClick={this.handleClickEdit}>Редактировать заявку</button>
+                    <button onClick={this.handleClickDelete} className="button-delete">Удалить заявку</button>
+                    <button onClick={this.handleClickEdit} className="button-edit">Редактировать заявку</button>
                 </div>
                 <div className={`view-request ${!this.state.isEdit ? 'hide' : ''}`}>
                     <h1>Измениение заявки</h1>
@@ -113,12 +113,12 @@ export class RequestViewingDialog extends Component {
                         <label className="form-label">Телефон перевозчика <input name="TelephoneCarrier" type="text" placeholder="Введите телефон перевозчика"
                         value={this.state.editingRequest.TelephoneCarrier} onChange={this.handleInputChange}
                         pattern="^\d{11}"/></label>
-                        <label className="form-label">Коментарий <input name="comment" type="text" placeholder="Введите коментарий заявки"
+                        <label className="form-label">Коментарий <textarea name="comment" placeholder="Введите коментарий заявки"
                         value={this.state.editingRequest.comment} onChange={this.handleInputChange}/></label>
                         <label className="form-label">ATI код <input name="ATICode" type="text" placeholder="Введите ATI код"
                         value={this.state.editingRequest.ATICode} onChange={this.handleInputChange}
                         pattern="^\d+$"/></label>
-                        <input type="submit" value="Сохранить изменения"/>
+                        <input type="submit" value="Сохранить изменения" className="submit-save-edit"/>
                     </form>
                 </div>
             </Dialog>

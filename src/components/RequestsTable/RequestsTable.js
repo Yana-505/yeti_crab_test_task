@@ -62,6 +62,9 @@ export class RequestsTable extends Component {
     };
 
     handleViewDialogOpen(event) {
+        // если кликнули на ссылку в табл.
+        if (event.target.tagName.toUpperCase() === "A")
+            return;
         const id = event.currentTarget.dataset.id;
         this.setState({
             viewDialogVisible: true
@@ -90,10 +93,10 @@ export class RequestsTable extends Component {
 
     render() {
         return (
-            <div className="RequestsAll">
+            <div className="requests-all">
                 <h1>Таблица заявок</h1>
-                <button className="newRequest" onClick={this.handleCreationDialogOpen}>Создать заявку</button>
-                <table className="RequestsTable">
+                <button className="new-request" onClick={this.handleCreationDialogOpen}>Создать заявку</button>
+                <table className="requests-table">
                     <tr>
                         <th>Номер заявки</th>
                         <th>Название фирмы клиента</th>
@@ -104,13 +107,15 @@ export class RequestsTable extends Component {
                     </tr>
                     {
                         this.state.data.map(e =>
-                            <tr key={e._id} data-id={e._id} onClick={this.handleViewDialogOpen}>
+                            <tr key={e._id} data-id={e._id} onClick={this.handleViewDialogOpen} className="line-request">
                                 <td>{e.number}</td>
                                 <td>{e.CompanyName}</td>
                                 <td>{e.FIOCarrier}</td>
                                 <td>{e.TelephoneCarrier}</td>
                                 <td>{e.comment}</td>
                                 <td><a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     href={`https://ati.su/firms/${e.ATICode}/info`}>https://ati.su/firms/{e.ATICode}/info</a>
                                 </td>
                             </tr>

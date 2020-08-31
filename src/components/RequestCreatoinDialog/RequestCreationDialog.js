@@ -44,11 +44,11 @@ export class RequestCreationDialog extends Component {
                     pattern="(^[А-Яа-я]+\s[А-Яа-я]+\s[А-Яа-я]+)" required/></label>
                     <label className="form-label">Телефон перевозчика* <input name="TelephoneCarrier" type="text" placeholder="Введите телефон перевозчика"
                     pattern="^\d{11}"/></label>
-                    <label className="form-label">Коментарий <input name="comment" type="text" placeholder="Введите коментарий заявки"
+                    <label className="form-label">Коментарий <textarea name="comment"  placeholder="Введите коментарий заявки"
                     /></label>
                     <label className="form-label">ATI код* <input name="ATICode" type="text" placeholder="Введите ATI код"
                     pattern="^\d+$" required/></label>
-                    <input type="submit" value="Создать заявку"/>
+                    <input type="submit" value="Создать заявку" className="submit-create"/>
                 </form>
             </Dialog>
         )
