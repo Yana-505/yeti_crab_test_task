@@ -10,7 +10,8 @@ export class RequestsTable extends Component {
             data: [],
             selectedRequest: [],
             creationDialogVisible: false,
-            viewDialogVisible: false
+            viewDialogVisible: false,
+            valueSearch: ""
         }
         this.handleAddNewRequest = this.handleAddNewRequest.bind(this);
         this.handleCreationDialogOpen = this.handleCreationDialogOpen.bind(this)
@@ -19,6 +20,7 @@ export class RequestsTable extends Component {
         this.handleViewDialogClose = this.handleViewDialogClose.bind(this);
         this.handleDeleteRequest = this.handleDeleteRequest.bind(this);
         this.handleEditRequest = this.handleEditRequest.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     componentDidMount() {
@@ -91,11 +93,25 @@ export class RequestsTable extends Component {
         });
     }
 
+    handleSearch(event){
+        const value = event.target.value
+        this.setState({
+            valueSearch: value,
+        })
+        fetch(`http://localhost:3010/requests?q=${value}`,{
+            method: "GET"
+        })
+            .then(response => response.json())
+            .then(result => this.setState({data: result}))
+
+    }
+
     render() {
         return (
             <div className="requests-all">
                 <h1>Таблица заявок</h1>
                 <button className="new-request" onClick={this.handleCreationDialogOpen}>Создать заявку</button>
+                <input className="" placeholder="Поиск заявок" value={this.state.valueSearch} onChange={this.handleSearch}/>
                 <table className="requests-table">
                     <tr>
                         <th>Номер заявки</th>
