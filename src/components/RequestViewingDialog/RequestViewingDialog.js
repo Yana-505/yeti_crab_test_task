@@ -102,19 +102,22 @@ export class RequestViewingDialog extends Component {
                     <form className="NewRequest" onSubmit={this.handleClickSave}>
                         <div className="data-prop">Номер заявки: <span className="data-field">{this.props.request.number}</span></div>
                         <label className="form-label">Дата заявки <input name="date" type="date" placeholder="Введите дату заявки"
-                        value={this.state.editingRequest.date} onChange={this.handleInputChange}/></label>
+                        value={this.state.editingRequest.date} onChange={this.handleInputChange} /></label>
                         <label className="form-label">Время заявки <input name="time" type="time" placeholder="Введите время заявки"
                         value={this.state.editingRequest.time} onChange={this.handleInputChange}/></label>
                         <label className="form-label">Название фирмы клиента <input name="CompanyName" type="text" placeholder="Введите название фирмы клиента"
                         value={this.state.editingRequest.CompanyName} onChange={this.handleInputChange}/></label>
                         <label className="form-label">ФИО перевозчика <input name="FIOCarrier" type="text" placeholder="Введите ФИО перевозчика"
-                        value={this.state.editingRequest.FIOCarrier} onChange={this.handleInputChange}/></label>
+                        value={this.state.editingRequest.FIOCarrier} onChange={this.handleInputChange}
+                        pattern="(^[А-Яа-я]+\s[А-Яа-я]+\s[А-Яа-я]+)"/></label>
                         <label className="form-label">Телефон перевозчика <input name="TelephoneCarrier" type="text" placeholder="Введите телефон перевозчика"
-                        value={this.state.editingRequest.TelephoneCarrier} onChange={this.handleInputChange}/></label>
+                        value={this.state.editingRequest.TelephoneCarrier} onChange={this.handleInputChange}
+                        pattern="^\d{11}"/></label>
                         <label className="form-label">Коментарий <input name="comment" type="text" placeholder="Введите коментарий заявки"
                         value={this.state.editingRequest.comment} onChange={this.handleInputChange}/></label>
                         <label className="form-label">ATI код <input name="ATICode" type="text" placeholder="Введите ATI код"
-                        value={this.state.editingRequest.ATICode} onChange={this.handleInputChange}/></label>
+                        value={this.state.editingRequest.ATICode} onChange={this.handleInputChange}
+                        pattern="^\d+$"/></label>
                         <input type="submit" value="Сохранить изменения"/>
                     </form>
                 </div>
