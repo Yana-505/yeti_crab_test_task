@@ -111,7 +111,7 @@ export class RequestsTable extends Component {
             <div className="requests-all">
                 <h1>Таблица заявок</h1>
                 <button className="new-request" onClick={this.handleCreationDialogOpen}>Создать заявку</button>
-                <input className="" placeholder="Поиск заявок" value={this.state.valueSearch} onChange={this.handleSearch}/>
+                <input className="search-input" placeholder="Поиск заявок" value={this.state.valueSearch} onChange={this.handleSearch}/>
                 <table className="requests-table">
                     <tr>
                         <th>Номер заявки</th>
